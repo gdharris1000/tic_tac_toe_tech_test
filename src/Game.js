@@ -24,7 +24,9 @@ Board.prototype = function(){
             if (this.grid[i].ref === ref){
                 if (this.grid[i].value == null){
                 this.grid[i].value = player;
-                }else{
+                checkWin();
+                }
+                else{
                     error("Square already selected")
                 }
             }
@@ -33,14 +35,22 @@ Board.prototype = function(){
     }
 
     function error(message){
-        console.log(message)
+        console.log(2, message)
         return message
     }
 
+    function checkWin(){
+        
+        // if (this.grid)
+
+        return false;
+    }
+ 
     return {
        getGrid: getGrid,
        error: error,
-       update: update
+       update: update,
+       checkWin: checkWin
     }
 
 }();
