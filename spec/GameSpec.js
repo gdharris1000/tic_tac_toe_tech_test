@@ -1,9 +1,4 @@
 var board;
-// var playerXSpy = jasmine.createSpy('player').and.returnValue("X");
-// var playerOSpy = jasmine.createSpyObj('player', ['O'])
-
-
-
 
 describe("Game", function() {
     
@@ -11,12 +6,9 @@ describe("Game", function() {
         board = new Board();
       });
 
-    
-
     it("starts with an empty board", () => {
-        //var board = new Board();
-        
-        expect(board.getBoard()).toEqual([
+       
+        expect(board.getGrid()).toEqual([
             {ref: "A1", value: null}, 
         {ref: "A2", value: null}, 
         {ref: "A3", value: null},
@@ -31,7 +23,7 @@ describe("Game", function() {
 
     it("select a square", () => {
         board.update("A1", "X")
-        expect(board.getBoard()).toEqual([
+        expect(board.getGrid()).toEqual([
             {ref: "A1", value: "X"}, 
         {ref: "A2", value: null}, 
         {ref: "A3", value: null},
@@ -44,7 +36,12 @@ describe("Game", function() {
     ])
     });
 
-   
+    it("cannot select a square when it as already been selected", () => {
+        spyOn(board, 'error')
+        board.update("A1", "X");
+        board.update("A1", "X");
+        expect(board.error).toHaveBeenCalledWith("Square already selected");
+    })
     
     
 });

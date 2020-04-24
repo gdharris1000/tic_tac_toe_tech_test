@@ -1,5 +1,5 @@
 function Board(){
-   this.board = [
+   this.grid = [
     {ref: "A1", value: null}, 
     {ref: "A2", value: null}, 
     {ref: "A3", value: null},
@@ -9,28 +9,37 @@ function Board(){
     {ref: "C1", value: null},
     {ref: "C2", value: null},
     {ref: "C3", value: null},
-];
+    ];
 
 }
 
 Board.prototype = function(){
-    function getBoard(){
-        return this.board
+    function getGrid(){
+        return this.grid
     }
 
     function update(ref, player){
 
-        for (var i in this.board){
-            if (this.board[i].ref === ref){
-                this.board[i].value = player;
+        for (var i in this.grid){
+            if (this.grid[i].ref === ref){
+                if (this.grid[i].value == null){
+                this.grid[i].value = player;
+                }else{
+                    error("Square already selected")
+                }
             }
         }
-        console.log(this.board);
+        // console.log(this.grid);
+    }
 
+    function error(message){
+        console.log(message)
+        return message
     }
 
     return {
-       getBoard: getBoard,
+       getGrid: getGrid,
+       error: error,
        update: update
     }
 
